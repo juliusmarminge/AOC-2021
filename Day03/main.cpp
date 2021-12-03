@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
 
     if (argv[2][0] == '2')
     {
-        auto filter_numbers = [](std::vector<std::string> numbers, char bit1, char bit2) -> std::string {
+        auto filter_numbers = [](std::vector<std::string> numbers, char bit) -> std::string {
 
             int current_bit = 0;    // Starting at Most Significant
             while (numbers.size() > 1)
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
                 int zeroes = numbers.size() - ones;
 
                 char to_keep;
-                if (bit1 == '1')
+                if (bit == '1')
                     to_keep = ones >= zeroes ? '1' : '0';
                 else
                     to_keep = zeroes <= ones ? '0' : '1';
@@ -79,8 +79,8 @@ int main(int argc, char *argv[])
             }
             return numbers.front();
         };
-        std::string o2_generator = filter_numbers(numbers, '1', '0');
-        std::string co2_scrubber = filter_numbers(numbers, '0', '1');
+        std::string o2_generator = filter_numbers(numbers, '1');
+        std::string co2_scrubber = filter_numbers(numbers, '0');
         answer = std::bitset<16>(o2_generator).to_ulong() * std::bitset<16>(co2_scrubber).to_ulong();            
     }
 
